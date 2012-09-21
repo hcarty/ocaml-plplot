@@ -6,7 +6,7 @@ Authors:     Hezekiah M. Carty
 License:     LGPL-2.1 with OCaml linking exception
 Plugins:     DevFiles (0.3), META (0.3), StdFiles (0.3)
 
-Library hdf
+Library plplot
   BuildTools:       ocamlbuild
   Path:             src
   Modules:          Plplot
