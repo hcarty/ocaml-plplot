@@ -11,7 +11,7 @@
 #include <caml/custom.h>
 #include <caml/bigarray.h>
 #endif
-#include <caml/camlidlruntime.h>
+#include "camlidlruntime.h"
 
 
 #include "plplot_core.h"
