@@ -1,0 +1,19 @@
+OASISFormat: 0.3
+Name:        ocaml-plplot
+Version:     5.9.9
+Synopsis:    Bindings for the PLplot library
+Authors:     Hezekiah M. Carty
+License:     LGPL-2.1 with OCaml linking exception
+Plugins:     DevFiles (0.3), META (0.3), StdFiles (0.3)
+
+Library hdf
+  BuildTools:       ocamlbuild
+  Path:             src
+  Modules:          Plplot
+  InternalModules:  Plplot_core
+  CSources:         idlalloc.c,camlidlruntime.h,plplot_impl.c,plplot_core.h,plplot_core_stubs.c
+  XMETAType:        library
+  XMETADescription: Bindings for the PLplot API
+  FindlibName:      plplot
+  CompiledObject:   best
+
