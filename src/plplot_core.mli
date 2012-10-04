@@ -283,9 +283,6 @@ external pljoin : float -> float -> float -> float -> unit
 external pllab : string -> string -> string -> unit
 	= "camlidl_plplot_core_c_pllab"
 
-external plcolorbar : plplot_colorbar_opt -> plplot_position_opt -> float -> float -> float -> float -> int -> int -> int -> float -> float -> int -> int -> float -> int -> string -> string -> float array -> float * float
-	= "camlidl_plplot_core_c_plcolorbar_bytecode" "camlidl_plplot_core_c_plcolorbar"
-
 external pllightsource : float -> float -> float -> unit
 	= "camlidl_plplot_core_c_pllightsource"
 
@@ -615,3 +612,4 @@ val plunset_exit : unit -> unit
 external plgriddata : float array -> float array -> float array -> float array -> float array -> plplot_grid_method_type -> float -> float array array = "ml_plgriddata_bytecode" "ml_plgriddata"
 external plparseopts : string array -> plplot_parse_method_type list -> unit = "ml_plparseopts"
 external pllegend : plplot_legend_opt -> plplot_position_opt -> float -> float -> float -> int -> int -> int -> int -> int -> plplot_legend_opt array -> float -> float -> float -> float -> int array -> string array -> int array -> int array -> float array -> int array -> int array -> int array -> int array -> int array -> float array -> int array -> string array -> float * float = "ml_pllegend_byte" "ml_pllegend"
+external plcolorbar : plplot_colorbar_opt -> plplot_position_opt -> float -> float -> float -> float -> int -> int -> int -> float -> float -> int -> int -> float -> int -> plplot_colorbar_opt array -> string array -> string array -> float array array -> float * float = "ml_plcolorbar_byte" "ml_plcolorbar"

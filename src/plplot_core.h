@@ -263,8 +263,6 @@ _CAMLIDL_EXTERN_C void c_pljoin(/*in*/ double x1, /*in*/ double y1, /*in*/ doubl
 
 _CAMLIDL_EXTERN_C void c_pllab(/*in*/ char const *xlabel, /*in*/ char const *ylabel, /*in*/ char const *tlabel);
 
-_CAMLIDL_EXTERN_C void c_plcolorbar(/*out*/ double *p_colorbar_width, /*out*/ double *p_colorbar_height, /*in*/ plplot_colorbar_opt opt, /*in*/ plplot_position_opt position, /*in*/ double x, /*in*/ double y, /*in*/ double x_length, /*in*/ double y_length, /*in*/ int bg_color, /*in*/ int bb_color, /*in*/ int bb_style, /*in*/ double low_cap_color, /*in*/ double high_cap_color, /*in*/ int cont_color, /*in*/ int cont_width, /*in*/ double ticks, /*in*/ int sub_ticks, /*in*/ char const *axis_opts, /*in*/ char const *label, /*in*/ int n_values, /*in*/ double *values);
-
 _CAMLIDL_EXTERN_C void c_pllightsource(/*in*/ double x, /*in*/ double y, /*in*/ double z);
 
 _CAMLIDL_EXTERN_C void c_plline(/*in*/ int n, /*in*/ double *x, /*in*/ double *y);

@@ -449,20 +449,33 @@ module Plot :
       ?text_justification:float ->
       ?text_left:bool -> legend_entry_t list list -> plot_t
 
+    (** Colorbar axis definitions *)
+    type colorbar_axis_t
+
     (** Available colorbar kinds *)
     type colorbar_kind_t
 
-    (** [gradient_colorbar [|min; max|]] from [min] to [max] *)
-    val gradient_colorbar : float array -> colorbar_kind_t
+    (** [colorbar_axis ?axis values] creates a {!colorbar_axis_t} with the
+        given axis options and range values. *)
+    val colorbar_axis :
+      ?axis:axis_options_t list -> float array -> colorbar_axis_t
 
-    (** [image_colorbar [|min; max|]] from [min] to [max] *)
-    val image_colorbar : float array -> colorbar_kind_t
+    (** [gradient_colorbar ?axis [|min; max|]] from [min] to [max] *)
+    val gradient_colorbar :
+      ?axis:axis_options_t list -> float array -> colorbar_kind_t
 
-    (** [shade_colorbar ?custom contours] defines a shaded contour colorbar
-        with axis labels at even spacings ([custom = false]) or at the
-        locations of the values in [contours]
-        ([custom = true] - the default). *)
-    val shade_colorbar : ?custom:bool -> float array -> colorbar_kind_t
+    (** [image_colorbar ?axis [|min; max|]] from [min] to [max] *)
+    val image_colorbar :
+      ?axis:axis_options_t list -> float array -> colorbar_kind_t
+
+    (** [shade_colorbar ?custom ?axis contours] defines a shaded contour
+        colorbar with axis labels at even spacings ([custom = false]) or at the
+        locations of the values in [contours] ([custom = true] - the
+        default). *)
+    val shade_colorbar :
+      ?custom:bool ->
+      ?axis:axis_options_t list ->
+      float array -> colorbar_kind_t
 
     (** Default options used for a colorbar axis *)
     val default_colorbar_axis : axis_options_t list
@@ -475,8 +488,8 @@ module Plot :
       ?cap:float option * float option ->
       ?contour:color_t * int ->
       ?orient:(float * float) plot_side_t ->
-      ?axis:axis_options_t list ->
-      ?label:string plot_side_t ->
+      ?axis:colorbar_axis_t list ->
+      ?label:string plot_side_t list ->
       ?color:color_t -> ?scale:float ->
       colorbar_kind_t -> plot_t
 
@@ -764,8 +777,9 @@ external pllab : string -> string -> string -> unit
   = "camlidl_plplot_core_c_pllab"
 external plcolorbar : plplot_colorbar_opt -> plplot_position_opt -> float ->
   float -> float -> float -> int -> int -> int -> float -> float -> int ->
-  int -> float -> int -> string -> string -> float array -> float * float
-  = "camlidl_plplot_core_c_plcolorbar_bytecode" "camlidl_plplot_core_c_plcolorbar"
+  int -> float -> int -> plplot_colorbar_opt array -> string array ->
+  string array -> float array array -> float * float
+  = "ml_plcolorbar_byte" "ml_plcolorbar"
 external pllegend : plplot_legend_opt -> plplot_position_opt ->
   float -> float -> float -> int -> int -> int -> int -> int ->
   plplot_legend_opt array -> float -> float ->
