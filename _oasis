@@ -16,5 +16,7 @@ Library plplot
   XMETADescription: Bindings for the PLplot API
   FindlibName:      plplot
   CompiledObject:   best
-  CCLib:            -lplplotd -lltdl -lm -lcsirocsa -lcsironn -lqhull -lqsastime -lfreetype
+  CCOpt:            -g -O2
+  if false
+    CCLib:          -fake
 
