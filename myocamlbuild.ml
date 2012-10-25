@@ -1,52 +1,38 @@
 (* OASIS_START *)
 (* OASIS_STOP *)
 
+let run_and_read = Ocamlbuild_pack.My_unix.run_and_read
+let blank_sep_strings = Ocamlbuild_pack.Lexers.blank_sep_strings
+
+let read_chunks cmd =
+  blank_sep_strings (
+    Lexing.from_string (
+      run_and_read cmd
+    )
+  )
+
 let () =
   let additional_rules = function
     | After_rules ->
         (* Add correct PLplot compilation and link flags *)
         let plplot_clibs, oplplot_cflags, oplplot_clibs =
-          let icc = Unix.open_process_in "pkg-config plplotd --cflags-only-I" in
-          let icl = Unix.open_process_in "pkg-config plplotd --libs-only-l" in
-          let icL = Unix.open_process_in "pkg-config plplotd --libs-only-L" in
-          try
-            let plplot_cflags = input_line icc in
-            let plplot_clibs_l = input_line icl in
-            let plplot_clibs_L = input_line icL in
-            (* TODO: remove once split-function in generated code is fixed *)
-            let rec split_string s =
-              match try Some (String.index s ' ') with Not_found -> None with
-              | Some pos ->
-                  let sub = String.before s pos in
-                  if sub <> "" then
-                    sub :: split_string (String.after s (pos + 1))
-                  else
-                    split_string (String.after s (pos + 1))
-              | None -> if s <> "" then [s] else []
-            in
-            let ocamlify ~ocaml_flag flags =
-              let chunks = split_string flags in
-              let cnv flag = [A ocaml_flag; A flag] in
-              List.concat (List.map cnv chunks)
-            in
-            let split_flags flags =
-              let chunks = split_string flags in
-              let cnv flag = A flag in
-              List.map cnv chunks
-            in
-            close_in icl;
-            close_in icc;
-            S (split_flags plplot_clibs_L @ split_flags plplot_clibs_l),
-            S (ocamlify ~ocaml_flag:"-ccopt" plplot_cflags),
-            S (
-              ocamlify ~ocaml_flag:"-cclib" plplot_clibs_L @
-              ocamlify ~ocaml_flag:"-cclib" plplot_clibs_l
-            )
-          with exn ->
-            close_in icL;
-            close_in icl;
-            close_in icc;
-            raise exn
+          let plplot_cflags = read_chunks "pkg-config plplotd --cflags-only-I" in
+          let plplot_clibs_l = read_chunks "pkg-config plplotd --libs-only-l" in
+          let plplot_clibs_L = read_chunks "pkg-config plplotd --libs-only-L" in
+          let ocamlify ~ocaml_flag flags =
+            let cnv flag = [A ocaml_flag; A flag] in
+            List.concat (List.map cnv flags)
+          in
+          let split_flags flags =
+            let cnv flag = A flag in
+            List.map cnv flags
+          in
+          S (split_flags plplot_clibs_L @ split_flags plplot_clibs_l),
+          S (ocamlify ~ocaml_flag:"-ccopt" plplot_cflags),
+          S (
+            ocamlify ~ocaml_flag:"-cclib" plplot_clibs_L @
+            ocamlify ~ocaml_flag:"-cclib" plplot_clibs_l
+          )
         in
         flag ["compile"; "c"] oplplot_cflags;
         flag ["link"; "ocaml"; "library"] oplplot_clibs;
