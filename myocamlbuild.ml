@@ -6,7 +6,7 @@ let () =
     | After_rules ->
         (* Add correct PLplot compilation and link flags *)
         let plplot_clibs, oplplot_cflags, oplplot_clibs =
-          let icc = Unix.open_process_in "pkg-config plplotd --cflags" in
+          let icc = Unix.open_process_in "pkg-config plplotd --cflags-only-I" in
           let icl = Unix.open_process_in "pkg-config plplotd --libs" in
           try
             let plplot_cflags = input_line icc in
