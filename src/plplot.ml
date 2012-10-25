@@ -953,17 +953,31 @@ module Plot = struct
     let main_axis_string, tick_spacing, sub_ticks =
       string_ticks_of_axis_options main_axis
     in
-    let extra_axis_strings, extra_values =
-      List.split (
-        List.map (
-          fun { axis_def; axis_values } ->
-            let str, _, _ = string_ticks_of_axis_options axis_def in
-            str, axis_values
-        ) extra_axes
-      )
+    let extra_axis_strings, extra_axis_tick_spacing, extra_axis_sub_ticks, extra_values =
+      let axes =
+        Array.of_list (
+          List.map (
+            fun { axis_def; axis_values } ->
+              let str, tick_spacing, sub_ticks =
+                string_ticks_of_axis_options axis_def
+              in
+              str, tick_spacing, sub_ticks, axis_values
+          ) extra_axes
+        )
+      in
+      Array.to_list (Array.map (fun (x, _, _, _) -> x) axes),
+      Array.to_list (Array.map (fun (_, x, _, _) -> x) axes),
+      Array.to_list (Array.map (fun (_, _, x, _) -> x) axes),
+      Array.to_list (Array.map (fun (_, _, _, x) -> x) axes)
     in
     let axis_strings =
       Array.of_list (main_axis_string :: extra_axis_strings)
+    in
+    let tick_spacing =
+      Array.of_list (tick_spacing :: extra_axis_tick_spacing)
+    in
+    let sub_ticks =
+      Array.of_list (sub_ticks :: extra_axis_sub_ticks)
     in
     let values =
       Array.of_list (values :: extra_values)
@@ -983,9 +997,8 @@ module Plot = struct
                 bg bb bb_style
                 cap_low_color cap_high_color
                 cont_color cont_width
-                tick_spacing sub_ticks
                 label_opts labels
-                axis_strings values
+                axis_strings tick_spacing sub_ticks values
             )
         );
         Option.may (fun _ -> plsmaj 0.0 0.0; plsmin 0.0 0.0; plschr 0.0 0.0) scale;

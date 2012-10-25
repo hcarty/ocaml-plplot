@@ -777,8 +777,9 @@ external pllab : string -> string -> string -> unit
   = "camlidl_plplot_core_c_pllab"
 external plcolorbar : plplot_colorbar_opt -> plplot_position_opt -> float ->
   float -> float -> float -> int -> int -> int -> float -> float -> int ->
-  int -> float -> int -> plplot_colorbar_opt array -> string array ->
-  string array -> float array array -> float * float
+  int -> plplot_colorbar_opt array -> string array ->
+  string array -> float array -> int array -> float array array ->
+  float * float
   = "ml_plcolorbar_byte" "ml_plcolorbar"
 external pllegend : plplot_legend_opt -> plplot_position_opt ->
   float -> float -> float -> int -> int -> int -> int -> int ->

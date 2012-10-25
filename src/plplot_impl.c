@@ -906,15 +906,15 @@ value ml_plcolorbar( value opt, value position, value x, value y,
                      value bg_color, value bb_color, value bb_style,
                      value low_cap_color, value high_cap_color,
                      value cont_color, value cont_width,
-                     value ticks, value sub_ticks,
                      value label_opts, value label,
                      value axis_opts,
+                     value ticks, value sub_ticks,
                      value values )
 {
     CAMLparam5( opt, position, x, y, x_length );
     CAMLxparam5( y_length, bg_color, bb_color, bb_style, low_cap_color );
-    CAMLxparam5( high_cap_color, cont_color, cont_width, ticks, sub_ticks );
-    CAMLxparam4( label_opts, label, axis_opts, values );
+    CAMLxparam5( high_cap_color, cont_color, cont_width, label_opts, label );
+    CAMLxparam4( axis_opts, ticks, sub_ticks, values );
     CAMLlocal1( result );
     result = caml_alloc( 2, 0 );
 
@@ -939,6 +939,7 @@ value ml_plcolorbar( value opt, value position, value x, value y,
     // Define and initialize all of the C arrays to pass into plcolorbar
     INIT_STRING_ARRAY( label )
     INIT_STRING_ARRAY( axis_opts )
+    INIT_INT_ARRAY( sub_ticks );
 
     // Label options
     int c_label_opts[ n_labels ];
@@ -967,9 +968,9 @@ value ml_plcolorbar( value opt, value position, value x, value y,
                 Int_val( bg_color ), Int_val( bb_color ), Int_val( bb_style ),
                 Double_val( low_cap_color ), Double_val( high_cap_color ),
                 Int_val( cont_color ), Int_val( cont_width ),
-                Double_val( ticks ), Int_val( sub_ticks ),
                 n_labels, c_label_opts, c_label,
                 n_axes, c_axis_opts,
+                (double *)ticks, c_sub_ticks,
                 n_values, (const PLFLT * const *)c_values );
 
     // Return a tuple with the colorbar's size
