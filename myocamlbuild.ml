@@ -7,10 +7,12 @@ let () =
         (* Add correct PLplot compilation and link flags *)
         let plplot_clibs, oplplot_cflags, oplplot_clibs =
           let icc = Unix.open_process_in "pkg-config plplotd --cflags-only-I" in
-          let icl = Unix.open_process_in "pkg-config plplotd --libs" in
+          let icl = Unix.open_process_in "pkg-config plplotd --libs-only-l" in
+          let icL = Unix.open_process_in "pkg-config plplotd --libs-only-L" in
           try
             let plplot_cflags = input_line icc in
-            let plplot_clibs = input_line icl in
+            let plplot_clibs_l = input_line icl in
+            let plplot_clibs_L = input_line icL in
             (* TODO: remove once split-function in generated code is fixed *)
             let rec split_string s =
               match try Some (String.index s ' ') with Not_found -> None with
@@ -34,10 +36,14 @@ let () =
             in
             close_in icl;
             close_in icc;
-            S (split_flags plplot_clibs),
+            S (split_flags plplot_clibs_L @ split_flags plplot_clibs_l),
             S (ocamlify ~ocaml_flag:"-ccopt" plplot_cflags),
-            S (ocamlify ~ocaml_flag:"-cclib" plplot_clibs)
+            S (
+              ocamlify ~ocaml_flag:"-cclib" plplot_clibs_L @
+              ocamlify ~ocaml_flag:"-cclib" plplot_clibs_l
+            )
           with exn ->
+            close_in icL;
             close_in icl;
             close_in icc;
             raise exn
@@ -51,4 +57,3 @@ let () =
   dispatch (
     MyOCamlbuildBase.dispatch_combine
       [MyOCamlbuildBase.dispatch_default package_default; additional_rules])
-
