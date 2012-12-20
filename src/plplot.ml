@@ -1089,9 +1089,9 @@ module Plot = struct
     let plot_points (label, color, xs, ys, symbol, scale) =
       set_color_in color (
         fun () ->
-          plssym 0.0 scale;
+          plschr 0.0 scale;
           plstring xs ys symbol;
-          plssym 0.0 1.0;
+          plschr 0.0 1.0;
       )
     in
     let plot_polygon (color, xs, ys, fill) =
