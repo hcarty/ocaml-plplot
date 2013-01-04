@@ -1001,7 +1001,7 @@ module Plot = struct
                 axis_strings tick_spacing sub_ticks values
             )
         );
-        Option.may (fun _ -> plsmaj 0.0 0.0; plsmin 0.0 0.0; plschr 0.0 0.0) scale;
+        Option.may (fun _ -> plsmaj 0.0 1.0; plsmin 0.0 1.0; plschr 0.0 1.0) scale;
     )
 
   (** An easier to deduce alternative to {Plplot.plbox} *)
