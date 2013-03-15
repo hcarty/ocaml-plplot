@@ -256,7 +256,7 @@ module Plot :
     val axes :
       ?color:color_t ->
       ?style:line_style_t ->
-      ?width:int ->
+      ?width:float ->
       ?labelfunc:(plplot_axis_type -> float -> string) ->
       axis_options_t list -> axis_options_t list -> plot_t
 
@@ -285,7 +285,7 @@ module Plot :
     (** [join ?style color (x0, y0) (x1, y1)] *)
     val join :
       ?style:line_style_t ->
-      ?width:int ->
+      ?width:float ->
       color_t -> float * float -> float * float -> plot_t
 
     (** [label ?color x_label y_label title] adds axis labels and a title. *)
@@ -295,7 +295,7 @@ module Plot :
     val lines :
       ?label:string ->
       ?style:line_style_t ->
-      ?width:int ->
+      ?width:float ->
       color_t -> float array -> float array -> plot_t
 
     (** [map ?sw ?ne color outline_type] *)
@@ -957,7 +957,7 @@ external plw3d :
   float ->
   float -> float -> float -> float -> float -> float -> float -> unit
   = "camlidl_plplot_core_c_plw3d_bytecode" "camlidl_plplot_core_c_plw3d"
-external plwid : int -> unit = "camlidl_plplot_core_c_plwid"
+external plwidth : float -> unit = "camlidl_plplot_core_c_plwidth"
 external plwind : float -> float -> float -> float -> unit
   = "camlidl_plplot_core_c_plwind"
 external plxormod : bool -> bool = "camlidl_plplot_core_c_plxormod"
@@ -1007,7 +1007,7 @@ external plg_current_col0 : unit -> int
   = "camlidl_plplot_core_plg_current_col0"
 external plg_current_col1 : unit -> float
   = "camlidl_plplot_core_plg_current_col1"
-external plgwid : unit -> int = "camlidl_plplot_core_plgwid"
+external plgwidth : unit -> float = "camlidl_plplot_core_plgwidth"
 external plgchrht : unit -> float = "camlidl_plplot_core_plgchrht"
 external plstripc :
   string ->

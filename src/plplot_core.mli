@@ -535,8 +535,8 @@ external plvsta : unit -> unit
 external plw3d : float -> float -> float -> float -> float -> float -> float -> float -> float -> float -> float -> unit
 	= "camlidl_plplot_core_c_plw3d_bytecode" "camlidl_plplot_core_c_plw3d"
 
-external plwid : int -> unit
-	= "camlidl_plplot_core_c_plwid"
+external plwidth : float -> unit
+	= "camlidl_plplot_core_c_plwidth"
 
 external plwind : float -> float -> float -> float -> unit
 	= "camlidl_plplot_core_c_plwind"
@@ -583,8 +583,8 @@ external plg_current_col0 : unit -> int
 external plg_current_col1 : unit -> float
 	= "camlidl_plplot_core_plg_current_col1"
 
-external plgwid : unit -> int
-	= "camlidl_plplot_core_plgwid"
+external plgwidth : unit -> float
+	= "camlidl_plplot_core_plgwidth"
 
 external plgchrht : unit -> float
 	= "camlidl_plplot_core_plgchrht"

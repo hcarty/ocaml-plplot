@@ -3770,12 +3770,12 @@ value camlidl_plplot_core_c_plw3d_bytecode(value * argv, int argn)
   return camlidl_plplot_core_c_plw3d(argv[0], argv[1], argv[2], argv[3], argv[4], argv[5], argv[6], argv[7], argv[8], argv[9], argv[10]);
 }
 
-value camlidl_plplot_core_c_plwid(
+value camlidl_plplot_core_c_plwidth(
 	value _v_width)
 {
-  int width; /*in*/
-  width = Int_val(_v_width);
-  c_plwid(width);
+  double width; /*in*/
+  width = Double_val(_v_width);
+  c_plwidth(width);
   return Val_unit;
 }
 
@@ -4342,13 +4342,13 @@ value camlidl_plplot_core_plg_current_col1(value _unit)
   return _vres;
 }
 
-value camlidl_plplot_core_plgwid(value _unit)
+value camlidl_plplot_core_plgwidth(value _unit)
 {
-  int _res;
+  float _res;
   value _vres;
 
-  _res = plgwid();
-  _vres = Val_int(_res);
+  _res = plgwidth();
+  _vres = copy_double(_res);
   return _vres;
 }
 

@@ -431,7 +431,7 @@ _CAMLIDL_EXTERN_C void c_plvsta(void);
 
 _CAMLIDL_EXTERN_C void c_plw3d(/*in*/ double basex, /*in*/ double basey, /*in*/ double height, /*in*/ double xmin0, /*in*/ double xmax0, /*in*/ double ymin0, /*in*/ double ymax0, /*in*/ double zmin0, /*in*/ double zmax0, /*in*/ double alt, /*in*/ double az);
 
-_CAMLIDL_EXTERN_C void c_plwid(/*in*/ int width);
+_CAMLIDL_EXTERN_C void c_plwidth(/*in*/ double width);
 
 _CAMLIDL_EXTERN_C void c_plwind(/*in*/ double xmin, /*in*/ double xmax, /*in*/ double ymin, /*in*/ double ymax);
 
@@ -463,7 +463,7 @@ _CAMLIDL_EXTERN_C int plg_current_col0(void);
 
 _CAMLIDL_EXTERN_C float plg_current_col1(void);
 
-_CAMLIDL_EXTERN_C int plgwid(void);
+_CAMLIDL_EXTERN_C float plgwidth(void);
 
 _CAMLIDL_EXTERN_C float plgchrht(void);
 

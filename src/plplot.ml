@@ -173,15 +173,15 @@ module Plot = struct
     | Arc of
       (color_t * float * float * float * float * float * float * float * bool)
     | Axes of
-      (color_t * axis_options_t list * axis_options_t list * int *
+      (color_t * axis_options_t list * axis_options_t list * float *
        line_style_t * (plplot_axis_type -> float -> string) option)
     | Contours of (color_t * pltr_t * float array * float array array)
     | Image of image_t
     | Image_fr of (image_t * (float * float))
-    | Join of (color_t * float * float * float * float * int * line_style_t)
+    | Join of (color_t * float * float * float * float * float * line_style_t)
     | Labels of (color_t * string * string * string)
     | Lines of
-      (string option * color_t * float array * float array * int * line_style_t)
+      (string option * color_t * float array * float array * float * line_style_t)
     | Map of (color_t * map_t * float * float * float * float)
     | Points of
       (string option * color_t * float array * float array * string * float)
@@ -497,7 +497,7 @@ module Plot = struct
     Arc (color, x, y, a, b, angle1, angle2, rotation, fill)
 
   (** [axes ?color ?style ?width xopt yopt] *)
-  let axes ?(color = Black) ?(style = Solid_line) ?(width = 1) ?labelfunc xopt yopt =
+  let axes ?(color = Black) ?(style = Solid_line) ?(width = 1.0) ?labelfunc xopt yopt =
     Axes (color, xopt, yopt, width, style, labelfunc)
 
   (** Default axes *)
@@ -519,7 +519,7 @@ module Plot = struct
 
   (** [join color (x0, y0) (x1, y1)] *)
   let join ?style ?width color (x0, y0) (x1, y1) =
-    Join (color, x0, y0, x1, y1, width |? 1, style |? Solid_line)
+    Join (color, x0, y0, x1, y1, width |? 1.0, style |? Solid_line)
 
   (** [label x y title] labels the axes and adds plot title *)
   let label ?(color = Black) x y title =
@@ -527,7 +527,7 @@ module Plot = struct
 
   (** [lines ?label color xs ys] *)
   let lines ?label ?style ?width color xs ys =
-    Lines (label, color, xs, ys, width |? 1, style |? Solid_line)
+    Lines (label, color, xs, ys, width |? 1.0, style |? Solid_line)
 
   (** [map ?sw ?ne color outline] *)
   let map ?sw ?ne color outline =
@@ -1021,14 +1021,14 @@ module Plot = struct
     let plot_axes (color, xopt, yopt, width, style, labelfunc) =
       set_color_in color (
         fun () ->
-          let old_width = plgwid () in
-          plwid width;
+          let old_width = plgwidth () in
+          plwidth width;
           set_line_style style;
           Option.may plslabelfunc labelfunc;
           plot_axes xopt yopt;
           Option.may (fun _ -> plunset_labelfunc ()) labelfunc;
           set_line_style Solid_line;
-          plwid old_width;
+          plwidth old_width;
       )
     in
     let plot_contours (color, pltr, contours, data) =
@@ -1056,12 +1056,12 @@ module Plot = struct
     let plot_join (color, x0, y0, x1, y1, width, style) =
       set_color_in color (
         fun () ->
-          let old_width = plgwid () in
-          plwid width;
+          let old_width = plgwidth () in
+          plwidth width;
           set_line_style style;
           pljoin x0 y0 x1 y1;
           set_line_style Solid_line;
-          plwid old_width;
+          plwidth old_width;
       )
     in
     let plot_labels (color, x, y, title) =
@@ -1072,12 +1072,12 @@ module Plot = struct
     let plot_lines (label, color, xs, ys, width, style) =
       set_color_in color (
         fun () ->
-          let old_width = plgwid () in
-          plwid width;
+          let old_width = plgwidth () in
+          plwidth width;
           set_line_style style;
           plline xs ys;
           set_line_style Solid_line;
-          plwid old_width;
+          plwidth old_width;
       )
     in
     let plot_map (color, outline, x0, y0, x1, y1) =
