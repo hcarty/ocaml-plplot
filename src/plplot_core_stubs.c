@@ -242,6 +242,52 @@ value _v1;
   return _v1;
 }
 
+int camlidl_transl_table_plplot_core_enum_7[17] = {
+  PL_COLORBAR_LABEL_LEFT,
+  PL_COLORBAR_LABEL_RIGHT,
+  PL_COLORBAR_LABEL_TOP,
+  PL_COLORBAR_LABEL_BOTTOM,
+  PL_COLORBAR_IMAGE,
+  PL_COLORBAR_SHADE,
+  PL_COLORBAR_GRADIENT,
+  PL_COLORBAR_CAP_NONE,
+  PL_COLORBAR_CAP_LOW,
+  PL_COLORBAR_CAP_HIGH,
+  PL_COLORBAR_SHADE_LABEL,
+  PL_COLORBAR_ORIENT_RIGHT,
+  PL_COLORBAR_ORIENT_TOP,
+  PL_COLORBAR_ORIENT_LEFT,
+  PL_COLORBAR_ORIENT_BOTTOM,
+  PL_COLORBAR_BACKGROUND,
+  PL_COLORBAR_BOUNDING_BOX,
+};
+
+int camlidl_ml2c_plplot_core_enum_plplot_colorbar_enum(value _v1)
+{
+  int _c2;
+  _c2 = camlidl_transl_table_plplot_core_enum_7[Int_val(_v1)];
+  return _c2;
+}
+
+value camlidl_c2ml_plplot_core_enum_plplot_colorbar_enum(int _c1)
+{
+  value _v2;
+  _v2 = camlidl_find_enum(_c1, camlidl_transl_table_plplot_core_enum_7, 17, "enum plplot_colorbar_enum: bad enum plplot_colorbar_enum value");
+  return _v2;
+}
+
+void camlidl_ml2c_plplot_core_plplot_colorbar_opt(value _v1, plplot_colorbar_opt * _c2, camlidl_ctx _ctx)
+{
+  (*_c2) = convert_flag_list(_v1, camlidl_transl_table_plplot_core_enum_7);
+}
+
+value camlidl_c2ml_plplot_core_plplot_colorbar_opt(plplot_colorbar_opt * _c2, camlidl_ctx _ctx)
+{
+value _v1;
+  _v1 = camlidl_alloc_flag_list((*_c2), camlidl_transl_table_plplot_core_enum_7, 17);
+  return _v1;
+}
+
 int camlidl_transl_table_plplot_core_enum_8[6] = {
   PL_FCI_FAMILY_UNCHANGED,
   PL_FCI_SANS,
@@ -3958,11 +4004,11 @@ value camlidl_plplot_core_ml_plshade(
   double shade_max; /*in*/
   int sh_cmap; /*in*/
   double sh_color; /*in*/
-  int sh_width; /*in*/
+  double sh_width; /*in*/
   int min_color; /*in*/
-  int min_width; /*in*/
+  double min_width; /*in*/
   int max_color; /*in*/
-  int max_width; /*in*/
+  double max_width; /*in*/
   int rectangular; /*in*/
   mlsize_t _c1;
   mlsize_t _c2;
@@ -3991,11 +4037,11 @@ value camlidl_plplot_core_ml_plshade(
   shade_max = Double_val(_v_shade_max);
   sh_cmap = Int_val(_v_sh_cmap);
   sh_color = Double_val(_v_sh_color);
-  sh_width = Int_val(_v_sh_width);
+  sh_width = Double_val(_v_sh_width);
   min_color = Int_val(_v_min_color);
-  min_width = Int_val(_v_min_width);
+  min_width = Double_val(_v_min_width);
   max_color = Int_val(_v_max_color);
-  max_width = Int_val(_v_max_width);
+  max_width = Double_val(_v_max_width);
   rectangular = Int_val(_v_rectangular);
   ml_plshade(a, nx, ny, left, right, bottom, top, shade_min, shade_max, sh_cmap, sh_color, sh_width, min_color, min_width, max_color, max_width, rectangular);
   camlidl_free(_ctx);
@@ -4028,9 +4074,9 @@ value camlidl_plplot_core_ml_plshades(
   double ymax; /*in*/
   double *clevel; /*in*/
   int nlevel; /*in*/
-  int fill_width; /*in*/
+  double fill_width; /*in*/
   int cont_color; /*in*/
-  int cont_width; /*in*/
+  double cont_width; /*in*/
   int rectangular; /*in*/
   mlsize_t _c1;
   mlsize_t _c2;
@@ -4063,9 +4109,9 @@ value camlidl_plplot_core_ml_plshades(
     clevel[_c7] = Double_field(_v_clevel, _c7);
   }
   nlevel = _c6;
-  fill_width = Int_val(_v_fill_width);
+  fill_width = Double_val(_v_fill_width);
   cont_color = Int_val(_v_cont_color);
-  cont_width = Int_val(_v_cont_width);
+  cont_width = Double_val(_v_cont_width);
   rectangular = Int_val(_v_rectangular);
   ml_plshades(a, nx, ny, xmin, xmax, ymin, ymax, clevel, nlevel, fill_width, cont_color, cont_width, rectangular);
   camlidl_free(_ctx);
@@ -4322,6 +4368,12 @@ value camlidl_plplot_core_ml_pltr0(
   return _vresult;
 }
 
+value camlidl_plplot_core_ml_plsvect_reset(value _unit)
+{
+  ml_plsvect_reset();
+  return Val_unit;
+}
+
 value camlidl_plplot_core_plg_current_col0(value _unit)
 {
   int _res;
@@ -4334,7 +4386,7 @@ value camlidl_plplot_core_plg_current_col0(value _unit)
 
 value camlidl_plplot_core_plg_current_col1(value _unit)
 {
-  float _res;
+  double _res;
   value _vres;
 
   _res = plg_current_col1();
@@ -4344,7 +4396,7 @@ value camlidl_plplot_core_plg_current_col1(value _unit)
 
 value camlidl_plplot_core_plgwidth(value _unit)
 {
-  float _res;
+  double _res;
   value _vres;
 
   _res = plgwidth();
@@ -4354,7 +4406,7 @@ value camlidl_plplot_core_plgwidth(value _unit)
 
 value camlidl_plplot_core_plgchrht(value _unit)
 {
-  float _res;
+  double _res;
   value _vres;
 
   _res = plgchrht();

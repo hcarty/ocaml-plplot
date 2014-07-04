@@ -410,9 +410,9 @@ void ml_plcont( const PLFLT **f, PLINT nx, PLINT ny,
 void ml_plshade( const PLFLT **a, PLINT nx, PLINT ny,
                  PLFLT left, PLFLT right, PLFLT bottom, PLFLT top,
                  PLFLT shade_min, PLFLT shade_max,
-                 PLINT sh_cmap, PLFLT sh_color, PLINT sh_width,
-                 PLINT min_color, PLINT min_width,
-                 PLINT max_color, PLINT max_width,
+                 PLINT sh_cmap, PLFLT sh_color, PLFLT sh_width,
+                 PLINT min_color, PLFLT min_width,
+                 PLINT max_color, PLFLT max_width,
                  PLBOOL rectangular )
 {
     c_plshade( a, nx, ny,
@@ -449,8 +449,8 @@ void ml_plshade( const PLFLT **a, PLINT nx, PLINT ny,
 //
 void ml_plshades( const PLFLT **a, PLINT nx, PLINT ny,
                   PLFLT xmin, PLFLT xmax, PLFLT ymin, PLFLT ymax,
-                  PLFLT *clevel, PLINT nlevel, PLINT fill_width,
-                  PLINT cont_color, PLINT cont_width,
+                  PLFLT *clevel, PLINT nlevel, PLFLT fill_width,
+                  PLINT cont_color, PLFLT cont_width,
                   PLBOOL rectangular )
 {
     c_plshades( a, nx, ny,
@@ -495,6 +495,14 @@ void ml_plvect( const PLFLT **u, const PLFLT **v, PLINT nx, PLINT ny, PLFLT scal
     c_plvect( u, v, nx, ny, scale,
         get_ml_plotter_func(),
         (void *) 1 );
+}
+
+//
+// Wrapper to reset vector rendering
+//
+void ml_plsvect_reset()
+{
+    c_plsvect( NULL, NULL, 0, 0 );
 }
 
 //
@@ -655,12 +663,12 @@ int translate_parse_option( int parse_option )
     for ( i = 0; i < ( o ## _length ); i++ ) { ( c_ ## o )[i] = Int_val( Field( ( o ), i ) ); }
 
 // Copy an int array, o, of n element to the C array c
-#define INIT_INT_ARRAYS( o )        \
-    int o ## _length, o ## _inner;  \
-    o ## _length = Wosize_val( o ); \
-    int *c_ ## o[o ## _length];     \
+#define INIT_INT_ARRAYS( o )                   \
+    int o ## _length, o ## _inner;             \
+    o ## _length = Wosize_val( o );            \
+    int *c_ ## o[o ## _length];                \
     for ( i = 0; i < ( o ## _length ); i++ ) { \
-        INIT_INT_ARRAY( o ## _subarray ); \
+        INIT_INT_ARRAY( o ## _subarray );      \
         ( c_ ## o )[i] = c_ ## o ## _subarray; \
     }
 
@@ -768,16 +776,16 @@ int translate_colorbar_option( int colorbar_option )
     int translated_option;
     switch ( colorbar_option )
     {
-    case 0: translated_option = PL_COLORBAR_LABEL_LEFT; break;
-    case 1: translated_option = PL_COLORBAR_LABEL_RIGHT; break;
-    case 2: translated_option = PL_COLORBAR_LABEL_TOP; break;
-    case 3: translated_option = PL_COLORBAR_LABEL_BOTTOM; break;
-    case 4: translated_option = PL_COLORBAR_IMAGE; break;
-    case 5: translated_option = PL_COLORBAR_SHADE; break;
-    case 6: translated_option = PL_COLORBAR_GRADIENT; break;
-    case 7: translated_option = PL_COLORBAR_CAP_NONE; break;
-    case 8: translated_option = PL_COLORBAR_CAP_LOW; break;
-    case 9: translated_option = PL_COLORBAR_CAP_HIGH; break;
+    case 0: translated_option  = PL_COLORBAR_LABEL_LEFT; break;
+    case 1: translated_option  = PL_COLORBAR_LABEL_RIGHT; break;
+    case 2: translated_option  = PL_COLORBAR_LABEL_TOP; break;
+    case 3: translated_option  = PL_COLORBAR_LABEL_BOTTOM; break;
+    case 4: translated_option  = PL_COLORBAR_IMAGE; break;
+    case 5: translated_option  = PL_COLORBAR_SHADE; break;
+    case 6: translated_option  = PL_COLORBAR_GRADIENT; break;
+    case 7: translated_option  = PL_COLORBAR_CAP_NONE; break;
+    case 8: translated_option  = PL_COLORBAR_CAP_LOW; break;
+    case 9: translated_option  = PL_COLORBAR_CAP_HIGH; break;
     case 10: translated_option = PL_COLORBAR_SHADE_LABEL; break;
     case 11: translated_option = PL_COLORBAR_ORIENT_RIGHT; break;
     case 12: translated_option = PL_COLORBAR_ORIENT_TOP; break;
@@ -848,10 +856,8 @@ value ml_pllegend( value opt, value position, value x, value y, value plot_width
     INIT_INT_ARRAY( text_colors )
     INIT_INT_ARRAY( box_colors )
     INIT_INT_ARRAY( box_patterns )
-    INIT_INT_ARRAY( box_line_widths )
     INIT_INT_ARRAY( line_colors )
     INIT_INT_ARRAY( line_styles )
-    INIT_INT_ARRAY( line_widths )
     INIT_INT_ARRAY( symbol_colors )
     INIT_INT_ARRAY( symbol_numbers )
     INIT_STRING_ARRAY( symbols )
@@ -879,8 +885,8 @@ value ml_pllegend( value opt, value position, value x, value y, value plot_width
         Double_val( text_justification ),
         c_text_colors, c_text,
         c_box_colors, c_box_patterns, (double *) box_scales,
-        c_box_line_widths,
-        c_line_colors, c_line_styles, c_line_widths,
+        (double *) box_line_widths,
+        c_line_colors, c_line_styles, (double *) line_widths,
         c_symbol_colors, (double *) symbol_scales, c_symbol_numbers,
         c_symbols );
 
@@ -930,7 +936,7 @@ value ml_plcolorbar( value opt, value position, value x, value y,
     n_axes = Wosize_val( axis_opts );
 
     // Translate configuration options
-    c_opt = lor_ml_list( opt, translate_colorbar_option );
+    c_opt      = lor_ml_list( opt, translate_colorbar_option );
     c_position = lor_ml_list( position, translate_position_option );
 
     // Assume that the dimensions all line up on the OCaml side, so we don't
@@ -950,8 +956,8 @@ value ml_plcolorbar( value opt, value position, value x, value y,
 
     // Copy the axis/range values
     double **c_values;
-    int n_values[ n_axes ];
-    c_values = malloc( n_axes * sizeof( double * ) );
+    int    n_values[ n_axes ];
+    c_values = malloc( n_axes * sizeof ( double * ) );
     // TODO: Add allocation failure check
     for ( i = 0; i < n_axes; i++ )
     {
@@ -963,15 +969,15 @@ value ml_plcolorbar( value opt, value position, value x, value y,
     PLFLT width, height;
 
     plcolorbar( &width, &height,
-                c_opt, c_position, Double_val( x ), Double_val( y ),
-                Double_val( x_length ), Double_val( y_length ),
-                Int_val( bg_color ), Int_val( bb_color ), Int_val( bb_style ),
-                Double_val( low_cap_color ), Double_val( high_cap_color ),
-                Int_val( cont_color ), Int_val( cont_width ),
-                n_labels, c_label_opts, c_label,
-                n_axes, c_axis_opts,
-                (double *)ticks, c_sub_ticks,
-                n_values, (const PLFLT * const *)c_values );
+        c_opt, c_position, Double_val( x ), Double_val( y ),
+        Double_val( x_length ), Double_val( y_length ),
+        Int_val( bg_color ), Int_val( bb_color ), Int_val( bb_style ),
+        Double_val( low_cap_color ), Double_val( high_cap_color ),
+        Int_val( cont_color ), Double_val( cont_width ),
+        n_labels, c_label_opts, c_label,
+        n_axes, c_axis_opts,
+        (double *) ticks, c_sub_ticks,
+        n_values, (const PLFLT * const *) c_values );
 
     // Return a tuple with the colorbar's size
     Store_field( result, 0, caml_copy_double( width ) );
@@ -1075,14 +1081,14 @@ int plg_current_col0( void )
 }
 
 // Get the current color map 1 color index
-float plg_current_col1( void )
+PLFLT plg_current_col1( void )
 {
     return plsc->icol1;
 }
 
 // Get the current pen width. TODO: Remove this, as I think this information
 // can be retrieved from another proper PLplot function.
-float plgwidth( void )
+PLFLT plgwidth( void )
 {
     return plsc->width;
 }
@@ -1090,7 +1096,7 @@ float plgwidth( void )
 // Get the current character (text) height in mm.  TODO: Remove this, as I
 // think this information can be retrieved from another proper PLplot
 // function
-float plgchrht( void )
+PLFLT plgchrht( void )
 {
     return plsc->chrht;
 }

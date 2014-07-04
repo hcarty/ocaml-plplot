@@ -553,10 +553,10 @@ external plMinMax2dGrid : float array array -> float * float
 external plcont : float array array -> int -> int -> int -> int -> float array -> unit
 	= "camlidl_plplot_core_ml_plcont_bytecode" "camlidl_plplot_core_ml_plcont"
 
-external plshade : float array array -> float -> float -> float -> float -> float -> float -> int -> float -> int -> int -> int -> int -> int -> bool -> unit
+external plshade : float array array -> float -> float -> float -> float -> float -> float -> int -> float -> float -> int -> float -> int -> float -> bool -> unit
 	= "camlidl_plplot_core_ml_plshade_bytecode" "camlidl_plplot_core_ml_plshade"
 
-external plshades : float array array -> float -> float -> float -> float -> float array -> int -> int -> int -> bool -> unit
+external plshades : float array array -> float -> float -> float -> float -> float array -> float -> int -> float -> bool -> unit
 	= "camlidl_plplot_core_ml_plshades_bytecode" "camlidl_plplot_core_ml_plshades"
 
 external plimagefr : float array array -> float -> float -> float -> float -> float -> float -> float -> float -> unit
@@ -576,6 +576,9 @@ external plpoly3 : float array -> float array -> float array -> bool array -> bo
 
 external pltr0 : float -> float -> float * float
 	= "camlidl_plplot_core_ml_pltr0"
+
+external plsvect_reset : unit -> unit
+	= "camlidl_plplot_core_ml_plsvect_reset"
 
 external plg_current_col0 : unit -> int
 	= "camlidl_plplot_core_plg_current_col0"
@@ -615,5 +618,5 @@ let plsexit (f : string -> int) =  Callback.register "caml_plplot_exit" f;  ml_p
 let plunset_exit () =  Callback.register "caml_plplot_exit" 0;  ml_plsexit ()
 external plgriddata : float array -> float array -> float array -> float array -> float array -> plplot_grid_method_type -> float -> float array array = "ml_plgriddata_bytecode" "ml_plgriddata"
 external plparseopts : string array -> plplot_parse_method_type list -> unit = "ml_plparseopts"
-external pllegend : plplot_legend_opt -> plplot_position_opt -> float -> float -> float -> int -> int -> int -> int -> int -> plplot_legend_opt array -> float -> float -> float -> float -> int array -> string array -> int array -> int array -> float array -> int array -> int array -> int array -> int array -> int array -> float array -> int array -> string array -> float * float = "ml_pllegend_byte" "ml_pllegend"
-external plcolorbar : plplot_colorbar_opt -> plplot_position_opt -> float -> float -> float -> float -> int -> int -> int -> float -> float -> int -> int -> plplot_colorbar_opt array -> string array -> string array -> float array -> int array -> float array array -> float * float = "ml_plcolorbar_byte" "ml_plcolorbar"
+external pllegend : plplot_legend_opt -> plplot_position_opt -> float -> float -> float -> int -> int -> int -> int -> int -> plplot_legend_opt array -> float -> float -> float -> float -> int array -> string array -> int array -> int array -> float array -> float array -> int array -> int array -> float array -> int array -> float array -> int array -> string array -> float * float = "ml_pllegend_byte" "ml_pllegend"
+external plcolorbar : plplot_colorbar_opt -> plplot_position_opt -> float -> float -> float -> float -> int -> int -> int -> float -> float -> int -> float -> plplot_colorbar_opt array -> string array -> string array -> float array -> int array -> float array array -> float * float = "ml_plcolorbar_byte" "ml_plcolorbar"

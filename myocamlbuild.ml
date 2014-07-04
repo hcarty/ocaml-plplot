@@ -640,9 +640,9 @@ let () =
     | After_rules ->
         (* Add correct PLplot compilation and link flags *)
         let plplot_clibs, oplplot_cflags, oplplot_clibs =
-          let plplot_cflags = read_chunks "pkg-config plplotd --cflags-only-I" in
-          let plplot_clibs_l = read_chunks "pkg-config plplotd --libs-only-l" in
-          let plplot_clibs_L = read_chunks "pkg-config plplotd --libs-only-L" in
+          let plplot_cflags = read_chunks "pkg-config plplot --cflags-only-I" in
+          let plplot_clibs_l = read_chunks "pkg-config plplot --libs-only-l" in
+          let plplot_clibs_L = read_chunks "pkg-config plplot --libs-only-L" in
           let ocamlify ~ocaml_flag flags =
             let cnv flag = [A ocaml_flag; A flag] in
             List.concat (List.map cnv flags)

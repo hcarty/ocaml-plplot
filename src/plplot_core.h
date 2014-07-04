@@ -443,9 +443,9 @@ _CAMLIDL_EXTERN_C void plMinMax2dGrid(/*in*/ double **f, /*in*/ int nx, /*in*/ i
 
 _CAMLIDL_EXTERN_C void ml_plcont(/*in*/ double **f, /*in*/ int nx, /*in*/ int ny, /*in*/ int kx, /*in*/ int lx, /*in*/ int ky, /*in*/ int ly, /*in*/ double *clevel, /*in*/ int nlevel);
 
-_CAMLIDL_EXTERN_C void ml_plshade(/*in*/ double **a, /*in*/ int nx, /*in*/ int ny, /*in*/ double left, /*in*/ double right, /*in*/ double bottom, /*in*/ double top, /*in*/ double shade_min, /*in*/ double shade_max, /*in*/ int sh_cmap, /*in*/ double sh_color, /*in*/ int sh_width, /*in*/ int min_color, /*in*/ int min_width, /*in*/ int max_color, /*in*/ int max_width, /*in*/ int rectangular);
+_CAMLIDL_EXTERN_C void ml_plshade(/*in*/ double **a, /*in*/ int nx, /*in*/ int ny, /*in*/ double left, /*in*/ double right, /*in*/ double bottom, /*in*/ double top, /*in*/ double shade_min, /*in*/ double shade_max, /*in*/ int sh_cmap, /*in*/ double sh_color, /*in*/ double sh_width, /*in*/ int min_color, /*in*/ double min_width, /*in*/ int max_color, /*in*/ double max_width, /*in*/ int rectangular);
 
-_CAMLIDL_EXTERN_C void ml_plshades(/*in*/ double **a, /*in*/ int nx, /*in*/ int ny, /*in*/ double xmin, /*in*/ double xmax, /*in*/ double ymin, /*in*/ double ymax, /*in*/ double *clevel, /*in*/ int nlevel, /*in*/ int fill_width, /*in*/ int cont_color, /*in*/ int cont_width, /*in*/ int rectangular);
+_CAMLIDL_EXTERN_C void ml_plshades(/*in*/ double **a, /*in*/ int nx, /*in*/ int ny, /*in*/ double xmin, /*in*/ double xmax, /*in*/ double ymin, /*in*/ double ymax, /*in*/ double *clevel, /*in*/ int nlevel, /*in*/ double fill_width, /*in*/ int cont_color, /*in*/ double cont_width, /*in*/ int rectangular);
 
 _CAMLIDL_EXTERN_C void ml_plimagefr(/*in*/ double **idata, /*in*/ int nx, /*in*/ int ny, /*in*/ double xmin, /*in*/ double xmax, /*in*/ double ymin, /*in*/ double ymax, /*in*/ double zmin, /*in*/ double zmax, /*in*/ double valuemin, /*in*/ double valuemax);
 
@@ -459,13 +459,15 @@ _CAMLIDL_EXTERN_C void ml_plpoly3(/*in*/ int n, /*in*/ double *x, /*in*/ double 
 
 _CAMLIDL_EXTERN_C void ml_pltr0(/*in*/ double x, /*in*/ double y, /*out*/ double *tx, /*out*/ double *ty);
 
+_CAMLIDL_EXTERN_C void ml_plsvect_reset(void);
+
 _CAMLIDL_EXTERN_C int plg_current_col0(void);
 
-_CAMLIDL_EXTERN_C float plg_current_col1(void);
+_CAMLIDL_EXTERN_C double plg_current_col1(void);
 
-_CAMLIDL_EXTERN_C float plgwidth(void);
+_CAMLIDL_EXTERN_C double plgwidth(void);
 
-_CAMLIDL_EXTERN_C float plgchrht(void);
+_CAMLIDL_EXTERN_C double plgchrht(void);
 
 #ifdef _WIN32
 #pragma pack(pop)

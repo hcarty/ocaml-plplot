@@ -1,6 +1,6 @@
 # OASIS_START
-# DO NOT EDIT (digest: ea4e137b008fc544fcda3b5e45132c10)
-version = "5.9.9"
+# DO NOT EDIT (digest: fa19c3fa1bc6fb12ab96ac5260d60349)
+version = "5.11.0"
 description = "Bindings for the PLplot API"
 archive(byte) = "plplot.cma"
 archive(byte, plugin) = "plplot.cma"

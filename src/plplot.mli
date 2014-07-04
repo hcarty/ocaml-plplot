@@ -24,46 +24,39 @@ along with PLplot.  If not, see <http://www.gnu.org/licenses/>.
 
     {!core} is {b not} expected to change. *)
 
-type plplot_axis_type =
-    PL_X_AXIS
-  | PL_Y_AXIS
-  | PL_Z_AXIS
-
 (** {3 A higher-level OCaml interface to PLplot} *)
 module Plot :
   sig
 
     (** {b THIS API IS NOT FIXED AND MAY CHANGE BEFORE THE 5.10.0 RELEASE} *)
 
+    type side_t = [`top | `bottom | `left | `right]
+    type 'a tagged_side_t =
+      [`top of 'a | `bottom of 'a | `left of 'a | `right of 'a]
     (** The different sides of a (2D) plot.  These values are used to
         represent, e.g., offsets along axes and text placement. *)
-    type 'a plot_side_t =
-      | Top of 'a
-      | Bottom of 'a
-      | Left of 'a
-      | Right of 'a
 
     (** These are the available options for drawing plot axes.  These values
         map to individual letters provided to {!Plplot.plbox} and similar
         functions. *)
     type axis_options_t =
-      | Axis
-      | Frame0
-      | Frame1
-      | Time
-      | Fixed_point
-      | Major_grid
-      | Minor_grid
-      | Invert_ticks
-      | Log
-      | Unconventional_label
-      | Label
-      | Custom_label
-      | Minor_ticks
-      | Minor_tick_count of int
-      | Major_ticks
-      | Major_tick_spacing of float
-      | Vertical_label
+      [ `axis
+      | `frame0
+      | `frame1
+      | `time
+      | `fixed_point
+      | `major_grid
+      | `minor_grid
+      | `invert_ticks
+      | `log
+      | `unconventional_label
+      | `label
+      | `custom_label
+      | `minor_ticks
+      | `minor_tick_count of int
+      | `major_ticks
+      | `major_tick_spacing of float
+      | `vertical_label ]
 
     (** A plot stream. *)
     type stream_t
@@ -72,25 +65,25 @@ module Plot :
         [cmapo_alternate.pal] file!  Note that these will NOT match up with
         colors from the default color palette! *)
     type color_t =
-      | White
-      | Red
-      | Yellow
-      | Green
-      | Gray
-      | Blue
-      | Light_blue
-      | Purple
-      | Pink
-      | Black
-      | Brown
-      | Index_color of int
+      [ `white
+      | `red
+      | `yellow
+      | `green
+      | `gray
+      | `blue
+      | `light_blue
+      | `purple
+      | `pink
+      | `black
+      | `brown
+      | `index of int ]
 
     (** Different map outlines available for {!map} *)
     type map_t =
-      | Globe_outline
-      | USA_outline
-      | Countries_outline
-      | All_outline
+      [ `globe
+      | `usa
+      | `countries
+      | `all ]
 
     (** Type signature for coordinate transform functions *)
     type pltr_t = float -> float -> float * float
@@ -101,41 +94,41 @@ module Plot :
     (** The different available plot device families.  This is not a complete
         representation of all of the available devices provided by PLplot. *)
     type plot_device_family_t =
-      | Cairo
-      | Qt
-      | Core
-      | Wx
+      [ `cairo
+      | `qt
+      | `core
+      | `wx ]
 
     (** Plot devices.  The constructor argument allows one to define which
         device family is used. *)
     type plot_device_t =
-      | Pdf of plot_device_family_t
-      | Png of plot_device_family_t
-      | Ps of plot_device_family_t
-      | Svg of plot_device_family_t
-      | Window of plot_device_family_t
-      | Prompt_user (** Ask for the correct device to use at run-time *)
-      | External of int (** Pre-defined plot streams *)
-      | Other_device of string (** PLplot plotting devices otherwise not
-                                   available from this list *)
+      [ `pdf of plot_device_family_t
+      | `png of plot_device_family_t
+      | `ps of plot_device_family_t
+      | `svg of plot_device_family_t
+      | `window of plot_device_family_t
+      | `prompt (** Ask for the correct device to use at run-time *)
+      | `stream of int (** Pre-defined plot streams *)
+      | `other_device of string ] (** PLplot plotting devices otherwise not
+                                     available from this list *)
 
     (** Type of scaling to use for plot axes, as in {!Plplot.plenv}. *)
-    type plot_scaling_t = Preset | Greedy | Equal | Equal_square
+    type plot_scaling_t = [ `preset | `greedy | `equal | `equal_square ]
 
     (** A color palette, usually loaded from disk *)
     type color_palette_t
 
     (** Line plotting styles/patterns. *)
     type line_style_t =
-      | Solid_line
-      | Line1 | Line2 | Line3 | Line4
-      | Line5 | Line6 | Line7 | Line8 (** These correspond to PLplot's
-                                          pre-defined line styles as set by
-                                          {!pllsty}. *)
-      | Custom_line of ((int * int) list) (** A custom line style, with each
-                                                (mark, space) pair defining the
-                                                length of one segment and gap
-                                                in the line drawing pattern. *)
+      [ `solid
+      | `line1 | `line2 | `line3 | `line4
+      | `line5 | `line6 | `line7 | `line8 (** These correspond to PLplot's
+                                              pre-defined line styles as set by
+                                              {!pllsty}. *)
+      | `custom of ((int * int) list) ] (** A custom line style, with each
+                                            (mark, space) pair defining the
+                                            length of one segment and gap
+                                            in the line drawing pattern. *)
 
     (** The default list of axis rendering options, used for all plots generated
         with {!init} if no custom options are provided. *)
@@ -257,7 +250,7 @@ module Plot :
       ?color:color_t ->
       ?style:line_style_t ->
       ?width:float ->
-      ?labelfunc:(plplot_axis_type -> float -> string) ->
+      ?labelfunc:([`x | `y | `z] -> float -> string) ->
       axis_options_t list -> axis_options_t list -> plot_t
 
     (** [default_axes] is equivalent to
@@ -319,8 +312,8 @@ module Plot :
 
     (** [shades ?fill_width ?contour ?rect (x0, y0) (x1, y1) contours data] *)
     val shades :
-      ?fill_width:int ->
-      ?contour:color_t * int ->
+      ?fill_width:float ->
+      ?contour:color_t * float ->
       ?rect:bool ->
       float * float -> float * float ->
       float array -> float array array -> plot_t
@@ -340,7 +333,7 @@ module Plot :
     val text_outside :
       ?just:float ->
       ?perp:bool ->
-      color_t -> float plot_side_t -> float -> string -> plot_t
+      color_t -> float tagged_side_t -> float -> string -> plot_t
 
     (** [func ?symbol ?step color f (min, max)] plots the function [f] from 
         [x = min] to [x = max].  [step] can be used to tighten or coarsen the
@@ -392,13 +385,13 @@ module Plot :
 
     (** Position relative to the plot viewport *)
     val viewport_pos :
-      ?side1:unit plot_side_t ->
-      ?side2:unit plot_side_t -> ?inside:bool -> float -> float -> position_t
+      ?side1:side_t ->
+      ?side2:side_t -> ?inside:bool -> float -> float -> position_t
 
     (** Position relative to the plot subpage *)
     val subpage_pos :
-      ?side1:unit plot_side_t ->
-      ?side2:unit plot_side_t -> ?inside:bool -> float -> float -> position_t
+      ?side1:side_t ->
+      ?side2:side_t -> ?inside:bool -> float -> float -> position_t
 
     (** Legend entry *)
     type legend_entry_t
@@ -413,13 +406,13 @@ module Plot :
     val box_legend :
       ?pattern:int ->
       ?scale:float ->
-      ?line_width:int ->
+      ?line_width:float ->
       ?label_color:color_t -> label:string -> color_t -> legend_entry_t
 
     (** Line legend entry *)
     val line_legend :
       ?style:int ->
-      ?width:int ->
+      ?width:float ->
       ?label_color:color_t -> label:string -> color_t -> legend_entry_t
 
     (** Symbol/point legend entry *)
@@ -486,10 +479,10 @@ module Plot :
       ?bg:color_t ->
       ?bb:color_t * line_style_t ->
       ?cap:float option * float option ->
-      ?contour:color_t * int ->
-      ?orient:(float * float) plot_side_t ->
+      ?contour:color_t * float ->
+      ?orient:(float * float) tagged_side_t ->
       ?axis:colorbar_axis_t list ->
-      ?label:string plot_side_t list ->
+      ?label:string tagged_side_t list ->
       ?color:color_t -> ?scale:float ->
       colorbar_kind_t -> plot_t
 
@@ -573,7 +566,11 @@ module Quick_plot :
 (** See the main PLplot documentation for the description and documentation of
     these functions. *)
 
-type plplot3d_style_enum =
+type plplot_axis_type =
+    PL_X_AXIS
+  | PL_Y_AXIS
+  | PL_Z_AXIS
+and plplot3d_style_enum =
     PL_DIFFUSE
   | PL_DRAW_LINEX
   | PL_DRAW_LINEY
@@ -777,7 +774,7 @@ external pllab : string -> string -> string -> unit
   = "camlidl_plplot_core_c_pllab"
 external plcolorbar : plplot_colorbar_opt -> plplot_position_opt -> float ->
   float -> float -> float -> int -> int -> int -> float -> float -> int ->
-  int -> plplot_colorbar_opt array -> string array ->
+  float -> plplot_colorbar_opt array -> string array ->
   string array -> float array -> int array -> float array array ->
   float * float
   = "ml_plcolorbar_byte" "ml_plcolorbar"
@@ -785,7 +782,7 @@ external pllegend : plplot_legend_opt -> plplot_position_opt ->
   float -> float -> float -> int -> int -> int -> int -> int ->
   plplot_legend_opt array -> float -> float ->
   float -> float -> int array -> string array -> int array -> int array ->
-  float array -> int array -> int array -> int array -> int array ->
+  float array -> float array -> int array -> int array -> float array ->
   int array -> float array -> int array -> string array -> float * float
   = "ml_pllegend_byte" "ml_pllegend"
 external pllightsource : float -> float -> float -> unit
@@ -975,13 +972,13 @@ external plshade :
   float ->
   float ->
   float ->
-  float -> int -> float -> int -> int -> int -> int -> int -> bool -> unit
+  float -> int -> float -> float -> int -> float -> int -> float -> bool -> unit
   = "camlidl_plplot_core_ml_plshade_bytecode"
   "camlidl_plplot_core_ml_plshade"
 external plshades :
   float array array ->
   float ->
-  float -> float -> float -> float array -> int -> int -> int -> bool -> unit
+  float -> float -> float -> float array -> float -> int -> float -> bool -> unit
   = "camlidl_plplot_core_ml_plshades_bytecode"
   "camlidl_plplot_core_ml_plshades"
 external plimagefr :
@@ -1003,6 +1000,7 @@ external plpoly3 :
   = "camlidl_plplot_core_ml_plpoly3"
 external pltr0 : float -> float -> float * float
   = "camlidl_plplot_core_ml_pltr0"
+external plsvect_reset : unit -> unit = "camlidl_plplot_core_ml_plsvect_reset"
 external plg_current_col0 : unit -> int
   = "camlidl_plplot_core_plg_current_col0"
 external plg_current_col1 : unit -> float
