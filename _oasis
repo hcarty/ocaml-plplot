@@ -4,7 +4,7 @@ Version:     5.9.9
 Synopsis:    Bindings for the PLplot library
 Authors:     Hezekiah M. Carty
 License:     LGPL-2.1 with OCaml linking exception
-Plugins:     DevFiles (0.4), META (0.4), StdFiles (0.4)
+Plugins:     META (0.4)
 
 Library plplot
   BuildTools:       ocamlbuild
