@@ -1,0 +1,11 @@
+# OASIS_START
+# DO NOT EDIT (digest: ea4e137b008fc544fcda3b5e45132c10)
+version = "5.9.9"
+description = "Bindings for the PLplot API"
+archive(byte) = "plplot.cma"
+archive(byte, plugin) = "plplot.cma"
+archive(native) = "plplot.cmxa"
+archive(native, plugin) = "plplot.cmxs"
+exists_if = "plplot.cma"
+# OASIS_STOP
+

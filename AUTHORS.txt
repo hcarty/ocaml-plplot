@@ -1,0 +1,8 @@
+(* OASIS_START *)
+(* DO NOT EDIT (digest: 26d7344d459a513d04d0b6d672a720d2) *)
+
+Authors of ocaml-plplot:
+
+* Hezekiah M. Carty
+
+(* OASIS_STOP *)

@@ -1,0 +1,28 @@
+# OASIS_START
+# DO NOT EDIT (digest: 42243cc03e7c5296c1b77d20e7a8ba9a)
+# Ignore VCS directories, you can use the same kind of rule outside
+# OASIS_START/STOP if you want to exclude directories that contains
+# useless stuff for the build process
+<**/.svn>: -traverse
+<**/.svn>: not_hygienic
+".bzr": -traverse
+".bzr": not_hygienic
+".hg": -traverse
+".hg": not_hygienic
+".git": -traverse
+".git": not_hygienic
+"_darcs": -traverse
+"_darcs": not_hygienic
+# Library plplot
+"src/plplot.cmxs": use_plplot
+<src/*.ml{,i}>: oasis_library_plplot_ccopt
+"src/idlalloc.c": oasis_library_plplot_ccopt
+"src/plplot_impl.c": oasis_library_plplot_ccopt
+"src/plplot_core_stubs.c": oasis_library_plplot_ccopt
+<src/plplot.{cma,cmxa}>: oasis_library_plplot_cclib
+"src/libplplot_stubs.lib": oasis_library_plplot_cclib
+"src/dllplplot_stubs.dll": oasis_library_plplot_cclib
+"src/libplplot_stubs.a": oasis_library_plplot_cclib
+"src/dllplplot_stubs.so": oasis_library_plplot_cclib
+<src/plplot.{cma,cmxa}>: use_libplplot_stubs
+# OASIS_STOP
