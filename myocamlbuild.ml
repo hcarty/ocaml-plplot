@@ -629,7 +629,7 @@ let run_and_read = Ocamlbuild_pack.My_unix.run_and_read
 let blank_sep_strings = Ocamlbuild_pack.Lexers.blank_sep_strings
 
 let read_chunks cmd =
-  blank_sep_strings (
+  blank_sep_strings cmd (
     Lexing.from_string (
       run_and_read cmd
     )
