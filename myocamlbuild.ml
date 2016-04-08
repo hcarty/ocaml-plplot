@@ -649,14 +649,30 @@ let read_chunks cmd =
     )
   )
 
+let plplot_pkg_config_names = ["plplotd";"plplot"]
+
+let find_plplot () =
+  let exists s =
+    try
+      let chunks = read_chunks @@ Printf.sprintf "pkg-config --exists %s" s in
+      List.for_all ((=) "") chunks
+    with _ (* Unix.Unix_error (Unix.ENOENT,_,_) *) -> false in
+  List.find_all exists plplot_pkg_config_names |> function
+  | [] -> failwith("No valid installation of plplot or plplotd found")
+  | x::xs -> x
+
 let () =
   let additional_rules = function
     | After_rules ->
-        (* Add correct PLplot compilation and link flags *)
+      (* Add correct PLplot compilation and link flags *)
+        let plplot_pkg_config_name = find_plplot () in
         let plplot_clibs, oplplot_cflags, oplplot_clibs =
-          let plplot_cflags = read_chunks "pkg-config plplot --cflags-only-I" in
-          let plplot_clibs_l = read_chunks "pkg-config plplot --libs-only-l" in
-          let plplot_clibs_L = read_chunks "pkg-config plplot --libs-only-L" in
+          let plplot_cflags = read_chunks @@
+            Printf.sprintf "pkg-config %s --cflags-only-I" plplot_pkg_config_name in
+          let plplot_clibs_l = read_chunks @@
+            Printf.sprintf "pkg-config %s --libs-only-l" plplot_pkg_config_name in
+          let plplot_clibs_L = read_chunks @@
+            Printf.sprintf "pkg-config %s --libs-only-L" plplot_pkg_config_name in
           let ocamlify ~ocaml_flag flags =
             let cnv flag = [A ocaml_flag; A flag] in
             List.concat (List.map cnv flags)
