@@ -22,9 +22,11 @@ remove: [
 
 depends: [
   "oasis" {build}
+  "ocamlbuild" {build}
 ]
 
 depexts: [
   [["debian"] ["libplplot-dev"]]
   [["ubuntu"] ["libplplot-dev"]]
+  [[ "osx" "homebrew" ] [ "plplot" ]]
 ]
