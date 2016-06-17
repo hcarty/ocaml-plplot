@@ -2,9 +2,13 @@ OASISFormat: 0.4
 Name:        ocaml-plplot
 Version:     5.11.0
 Synopsis:    Bindings for the PLplot library
-Authors:     Hezekiah M. Carty
+Description: PLplot is a library for creating scientific plots.
+             http://plplot.sf.net/
+Authors:     Hezekiah M. Carty <hez@0ok.org>
+Maintainers: Hezekiah M. Carty <hez@0ok.org>
+Homepage:    https://github.com/hcarty/ocaml-plplot/
 License:     LGPL-2.1 with OCaml linking exception
-Plugins:     META (0.4)
+Plugins:     META (0.4), DevFiles (0.4)
 
 Library plplot
   BuildTools:       ocamlbuild
@@ -20,3 +24,7 @@ Library plplot
   if false
     CCLib:          -fake
 
+SourceRepository master
+  Type: git
+  Location: https://github.com/hcarty/ocaml-plplot.git
+  Browser: https://github.com/hcarty/ocaml-plplot
