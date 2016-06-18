@@ -1,5 +1,5 @@
 OASISFormat: 0.4
-Name:        ocaml-plplot
+Name:        plplot
 Version:     5.11.0
 Synopsis:    Bindings for the PLplot library
 Description: PLplot is a library for creating scientific plots.

@@ -1,5 +1,5 @@
 opam-version: "1.2"
-name: "ocaml-plplot"
+name: "plplot"
 version: "5.11.0"
 maintainer: "Hezekiah M. Carty <hez@0ok.org>"
 authors: [ "Hezekiah M. Carty <hez@0ok.org>" ]
