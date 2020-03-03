@@ -1,5 +1,0 @@
-depexts: [
-  [["debian"] ["libplplot-dev"]]
-  [["ubuntu"] ["libplplot-dev"]]
-  [[ "osx" "homebrew" ] [ "plplot" ]]
-]
