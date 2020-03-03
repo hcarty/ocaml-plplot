@@ -13,9 +13,8 @@ build: [
 install: ["ocaml" "setup.ml" "-install"]
 depends: [
   "ocaml" {>= "4.02.0"}
-  "ocamlbuild" {build}
-  "ocamlfind" {build}
-  "stdlib-shims" {build}
+  "dune" {>= "2.0.0"}
+  "dune-configurator"
 ]
 depexts: [
   [["debian"] ["libplplot-dev"]]
