@@ -445,9 +445,13 @@ module Plot = struct
   let make ?stream ?filename ?size ?pre device =
     (* Make a new plot stream. *)
     let stream, init =
-      match device with
-      | `stream stream -> make_stream ~stream (), false
-      | _ -> make_stream (), true
+      match stream with
+      | Some s -> s, true
+      | None -> begin
+        match device with
+        | `stream stream -> make_stream ~stream (), false
+        | _ -> make_stream (), true
+        end
     in
     (* If an external stream is provided, assume all initialization has been
        performed before we get here. *)
