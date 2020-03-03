@@ -1084,7 +1084,7 @@ module Plot = struct
         fun () -> pllab x y title
       )
     in
-    let plot_lines (label, color, xs, ys, width, style) =
+    let plot_lines (_label, color, xs, ys, width, style) =
       set_color_in color (
         fun () ->
           let old_width = plgwidth () in
@@ -1101,7 +1101,7 @@ module Plot = struct
           plmap (string_of_map_t outline) x0 x1 y0 y1;
       )
     in
-    let plot_points (label, color, xs, ys, symbol, scale) =
+    let plot_points (_label, color, xs, ys, symbol, scale) =
       set_color_in color (
         fun () ->
           plschr 0.0 scale;
