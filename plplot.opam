@@ -6,11 +6,8 @@ homepage: "https://github.com/hcarty/ocaml-plplot/"
 dev-repo: "https://github.com/hcarty/ocaml-plplot.git"
 bug-reports: "https://github.com/hcarty/ocaml-plplot/issues"
 build: [
-  ["ocaml" "setup.ml" "-configure" "--enable-tests" {with-test} "--prefix" prefix]
-  ["ocaml" "setup.ml" "-build"]
-  ["ocaml" "setup.ml" "-test"] {with-test}
+  ["dune" "build" "-p" name]
 ]
-install: ["ocaml" "setup.ml" "-install"]
 depends: [
   "ocaml" {>= "4.02.0"}
   "dune" {>= "2.0.0"}
