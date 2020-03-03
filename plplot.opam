@@ -3,7 +3,7 @@ maintainer: "Hezekiah M. Carty <hez@0ok.org>"
 authors: [ "Hezekiah M. Carty <hez@0ok.org>" ]
 license: "LGPL-2.1 with OCaml linking exception"
 homepage: "https://github.com/hcarty/ocaml-plplot/"
-dev-repo: "https://github.com/hcarty/ocaml-plplot.git"
+dev-repo: "git://github.com/hcarty/ocaml-plplot.git"
 bug-reports: "https://github.com/hcarty/ocaml-plplot/issues"
 build: [
   ["dune" "build" "-p" name]
@@ -19,6 +19,4 @@ depexts: [
   [[ "osx" "homebrew" ] [ "plplot" ]]
 ]
 synopsis: "Bindings for the PLplot library"
-descr: """PLplot is a library for creating scientific plots.
-http://plplot.sf.net/
-"""
+descr: "PLplot is a library for creating scientific plots http://plplot.sf.net/"
