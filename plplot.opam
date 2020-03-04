@@ -14,9 +14,13 @@ depends: [
   "dune-configurator"
 ]
 depexts: [
-  [["debian"] ["libplplot-dev"]]
-  [["ubuntu"] ["libplplot-dev"]]
-  [[ "osx" "homebrew" ] [ "plplot" ]]
+  ["libplplot-dev" "libshp-dev"] {os-family = "debian"}
+  ["plplot"] {os = "macos" & os-distribution = "homebrew"}
+  ["plpot"] {os-family = "arch"}
+  ["plplot-devel"] {os-family = "rhel"}
+  ["plplot-devel"] {os-family = "fedora"}
+  ["plplot-devel"] {os-family = "suse"}
+  ["plplot"] {os-distribution = "nixos"}
 ]
 synopsis: "Bindings for the PLplot library"
 descr: "PLplot is a library for creating scientific plots http://plplot.sf.net/"
