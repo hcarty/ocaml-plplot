@@ -8,5 +8,5 @@
 
 Install [PLplot][] then pin this repository:
 ```
-opam pin add plplot -k git https://github.com/hcarty/ocaml-plplot.git
+opam install plplot
 ```
