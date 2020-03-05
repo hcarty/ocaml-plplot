@@ -5,6 +5,7 @@ license: "LGPL-2.1 with OCaml linking exception"
 homepage: "https://github.com/hcarty/ocaml-plplot/"
 dev-repo: "git://github.com/hcarty/ocaml-plplot.git"
 bug-reports: "https://github.com/hcarty/ocaml-plplot/issues"
+doc: "https://hcarty.github.io/ocaml-plplot/plplot"
 build: [
   ["dune" "build" "-p" name]
 ]
