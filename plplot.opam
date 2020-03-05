@@ -24,4 +24,4 @@ depexts: [
   ["plplot"] {os-distribution = "nixos"}
 ]
 synopsis: "Bindings for the PLplot library"
-descr: "PLplot is a library for creating scientific plots http://plplot.sf.net/"
+description: "PLplot is a library for creating scientific plots http://plplot.sf.net/"
