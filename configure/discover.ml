@@ -18,18 +18,22 @@ let () =
         | None -> default
         | Some p -> begin
             match C.Pkg_config.query ~package:"plplot" p with
-            |None -> default
-            |Some conf -> conf
-            end 
+            | None -> begin
+                match C.Pkg_config.query ~package:"plplotd" p with 
+                | None -> default 
+                | Some conf -> conf
+              end
+            | Some conf -> conf
+          end 
       in
       if not
-         @@ C.c_test
-              c
-              plplot_test
-              ~c_flags:conf.cflags
-              ~link_flags:conf.libs
+        @@ C.c_test
+          c
+          plplot_test
+          ~c_flags:conf.cflags
+          ~link_flags:conf.libs
       then
         failwith "No valid installation of plplot or plplotd found."
       else
         C.Flags.write_sexp "c_flags.sexp" conf.cflags;
-        C.Flags.write_sexp "c_library_flags.sexp" conf.libs)
+      C.Flags.write_sexp "c_library_flags.sexp" conf.libs)
