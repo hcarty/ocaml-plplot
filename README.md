@@ -2,11 +2,12 @@
 
 [PLplot][] is a library for creating scientific plots.
 
-[PLplot]: http://plplot.sf.net/
-
 # Installation
 
-Install [PLplot][] then pin this repository:
+The library is available in [opam][]:
 ```
 opam install plplot
 ```
+
+[opam]: https://opam.ocaml.org/
+[PLplot]: https://sourceforge.net/projects/plplot/
