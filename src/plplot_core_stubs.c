@@ -46,7 +46,7 @@ value camlidl_c2ml_plplot_core_enum_plplot3d_style_enum(int _c1)
 
 void camlidl_ml2c_plplot_core_plplot3d_style(value _v1, plplot3d_style * _c2, camlidl_ctx _ctx)
 {
-  (*_c2) = convert_flag_list(_v1, camlidl_transl_table_plplot_core_enum_1);
+  (*_c2) = caml_convert_flag_list(_v1, camlidl_transl_table_plplot_core_enum_1);
 }
 
 value camlidl_c2ml_plplot_core_plplot3d_style(plplot3d_style * _c2, camlidl_ctx _ctx)
@@ -78,14 +78,14 @@ value camlidl_c2ml_plplot_core_enum_plplot_bin_enum(int _c1)
   case PL_BIN_CENTRED: _v2 = Val_int(1); break;
   case PL_BIN_NOEXPAND: _v2 = Val_int(2); break;
   case PL_BIN_NOEMPTY: _v2 = Val_int(3); break;
-  default: invalid_argument("enum plplot_bin_enum: bad enum plplot_bin_enum value");
+  default: caml_invalid_argument("enum plplot_bin_enum: bad enum plplot_bin_enum value");
   }
   return _v2;
 }
 
 void camlidl_ml2c_plplot_core_plplot_bin_style(value _v1, plplot_bin_style * _c2, camlidl_ctx _ctx)
 {
-  (*_c2) = convert_flag_list(_v1, camlidl_transl_table_plplot_core_enum_2);
+  (*_c2) = caml_convert_flag_list(_v1, camlidl_transl_table_plplot_core_enum_2);
 }
 
 value camlidl_c2ml_plplot_core_plplot_bin_style(plplot_bin_style * _c2, camlidl_ctx _ctx)
@@ -119,7 +119,7 @@ value camlidl_c2ml_plplot_core_enum_plplot_hist_enum(int _c1)
 
 void camlidl_ml2c_plplot_core_plplot_hist_style(value _v1, plplot_hist_style * _c2, camlidl_ctx _ctx)
 {
-  (*_c2) = convert_flag_list(_v1, camlidl_transl_table_plplot_core_enum_3);
+  (*_c2) = caml_convert_flag_list(_v1, camlidl_transl_table_plplot_core_enum_3);
 }
 
 value camlidl_c2ml_plplot_core_plplot_hist_style(plplot_hist_style * _c2, camlidl_ctx _ctx)
@@ -151,7 +151,7 @@ value camlidl_c2ml_plplot_core_enum_plplot_run_level_enum(int _c1)
   case PL_INITIALIZED: _v2 = Val_int(1); break;
   case PL_VIEWPORT_DEFINED: _v2 = Val_int(2); break;
   case PL_WORLD_COORDINATES_DEFINED: _v2 = Val_int(3); break;
-  default: invalid_argument("enum plplot_run_level_enum: bad enum plplot_run_level_enum value");
+  default: caml_invalid_argument("enum plplot_run_level_enum: bad enum plplot_run_level_enum value");
   }
   return _v2;
 }
@@ -195,7 +195,7 @@ value camlidl_c2ml_plplot_core_enum_plplot_position_enum(int _c1)
 
 void camlidl_ml2c_plplot_core_plplot_position_opt(value _v1, plplot_position_opt * _c2, camlidl_ctx _ctx)
 {
-  (*_c2) = convert_flag_list(_v1, camlidl_transl_table_plplot_core_enum_5);
+  (*_c2) = caml_convert_flag_list(_v1, camlidl_transl_table_plplot_core_enum_5);
 }
 
 value camlidl_c2ml_plplot_core_plplot_position_opt(plplot_position_opt * _c2, camlidl_ctx _ctx)
@@ -232,7 +232,7 @@ value camlidl_c2ml_plplot_core_enum_plplot_legend_enum(int _c1)
 
 void camlidl_ml2c_plplot_core_plplot_legend_opt(value _v1, plplot_legend_opt * _c2, camlidl_ctx _ctx)
 {
-  (*_c2) = convert_flag_list(_v1, camlidl_transl_table_plplot_core_enum_6);
+  (*_c2) = caml_convert_flag_list(_v1, camlidl_transl_table_plplot_core_enum_6);
 }
 
 value camlidl_c2ml_plplot_core_plplot_legend_opt(plplot_legend_opt * _c2, camlidl_ctx _ctx)
@@ -278,7 +278,7 @@ value camlidl_c2ml_plplot_core_enum_plplot_colorbar_enum(int _c1)
 
 void camlidl_ml2c_plplot_core_plplot_colorbar_opt(value _v1, plplot_colorbar_opt * _c2, camlidl_ctx _ctx)
 {
-  (*_c2) = convert_flag_list(_v1, camlidl_transl_table_plplot_core_enum_7);
+  (*_c2) = caml_convert_flag_list(_v1, camlidl_transl_table_plplot_core_enum_7);
 }
 
 value camlidl_c2ml_plplot_core_plplot_colorbar_opt(plplot_colorbar_opt * _c2, camlidl_ctx _ctx)
@@ -333,7 +333,7 @@ value camlidl_c2ml_plplot_core_enum_plplot_fci_style_enum(int _c1)
   case PL_FCI_UPRIGHT: _v2 = Val_int(1); break;
   case PL_FCI_ITALIC: _v2 = Val_int(2); break;
   case PL_FCI_OBLIQUE: _v2 = Val_int(3); break;
-  default: invalid_argument("enum plplot_fci_style_enum: bad enum plplot_fci_style_enum value");
+  default: caml_invalid_argument("enum plplot_fci_style_enum: bad enum plplot_fci_style_enum value");
   }
   return _v2;
 }
@@ -358,7 +358,7 @@ value camlidl_c2ml_plplot_core_enum_plplot_fci_weight_enum(int _c1)
   case PL_FCI_WEIGHT_UNCHANGED: _v2 = Val_int(0); break;
   case PL_FCI_MEDIUM: _v2 = Val_int(1); break;
   case PL_FCI_BOLD: _v2 = Val_int(2); break;
-  default: invalid_argument("enum plplot_fci_weight_enum: bad enum plplot_fci_weight_enum value");
+  default: caml_invalid_argument("enum plplot_fci_weight_enum: bad enum plplot_fci_weight_enum value");
   }
   return _v2;
 }
@@ -385,7 +385,7 @@ value camlidl_c2ml_plplot_core_enum_plplot_draw_mode_enum(int _c1)
   case PL_DRAWMODE_DEFAULT: _v2 = Val_int(1); break;
   case PL_DRAWMODE_REPLACE: _v2 = Val_int(2); break;
   case PL_DRAWMODE_XOR: _v2 = Val_int(3); break;
-  default: invalid_argument("enum plplot_draw_mode_enum: bad enum plplot_draw_mode_enum value");
+  default: caml_invalid_argument("enum plplot_draw_mode_enum: bad enum plplot_draw_mode_enum value");
   }
   return _v2;
 }
@@ -577,7 +577,7 @@ value camlidl_plplot_core_c_plbtime(
     _vres[2] = Val_int(*day);
     _vres[3] = Val_int(*hour);
     _vres[4] = Val_int(*min);
-    _vres[5] = copy_double(*sec);
+    _vres[5] = caml_copy_double(*sec);
     _vresult = camlidl_alloc_small(6, 0);
     { mlsize_t _c7;
       for (_c7 = 0; _c7 < 6; _c7++) Field(_vresult, _c7) = _vres[_c7];
@@ -690,8 +690,8 @@ value camlidl_plplot_core_c_plcalc_world(
   window = &_c3;
   c_plcalc_world(rx, ry, wx, wy, window);
   Begin_roots_block(_vres, 3)
-    _vres[0] = copy_double(*wx);
-    _vres[1] = copy_double(*wy);
+    _vres[0] = caml_copy_double(*wx);
+    _vres[1] = caml_copy_double(*wy);
     _vres[2] = Val_int(*window);
     _vresult = camlidl_alloc_small(3, 0);
     Field(_vresult, 0) = _vres[0];
@@ -807,7 +807,7 @@ value camlidl_plplot_core_c_plctime(
   sec = Double_val(_v_sec);
   ctime = &_c1;
   c_plctime(year, month, day, hour, min, sec, ctime);
-  _vres = copy_double(*ctime);
+  _vres = caml_copy_double(*ctime);
   return _vres;
 }
 
@@ -1085,8 +1085,8 @@ value camlidl_plplot_core_c_plgchr(value _unit)
   p_ht = &_c2;
   c_plgchr(p_def, p_ht);
   Begin_roots_block(_vres, 2)
-    _vres[0] = copy_double(*p_def);
-    _vres[1] = copy_double(*p_ht);
+    _vres[0] = caml_copy_double(*p_def);
+    _vres[1] = caml_copy_double(*p_ht);
     _vresult = camlidl_alloc_small(2, 0);
     Field(_vresult, 0) = _vres[0];
     Field(_vresult, 1) = _vres[1];
@@ -1107,8 +1107,8 @@ value camlidl_plplot_core_c_plgcmap1_range(value _unit)
   max_color = &_c2;
   c_plgcmap1_range(min_color, max_color);
   Begin_roots_block(_vres, 2)
-    _vres[0] = copy_double(*min_color);
-    _vres[1] = copy_double(*max_color);
+    _vres[0] = caml_copy_double(*min_color);
+    _vres[1] = caml_copy_double(*max_color);
     _vresult = camlidl_alloc_small(2, 0);
     Field(_vresult, 0) = _vres[0];
     Field(_vresult, 1) = _vres[1];
@@ -1171,7 +1171,7 @@ value camlidl_plplot_core_c_plgcol0a(
     _vres[0] = Val_int(*r);
     _vres[1] = Val_int(*g);
     _vres[2] = Val_int(*b);
-    _vres[3] = copy_double(*a);
+    _vres[3] = caml_copy_double(*a);
     _vresult = camlidl_alloc_small(4, 0);
     Field(_vresult, 0) = _vres[0];
     Field(_vresult, 1) = _vres[1];
@@ -1230,7 +1230,7 @@ value camlidl_plplot_core_c_plgcolbga(value _unit)
     _vres[0] = Val_int(*r);
     _vres[1] = Val_int(*g);
     _vres[2] = Val_int(*b);
-    _vres[3] = copy_double(*a);
+    _vres[3] = caml_copy_double(*a);
     _vresult = camlidl_alloc_small(4, 0);
     Field(_vresult, 0) = _vres[0];
     Field(_vresult, 1) = _vres[1];
@@ -1261,7 +1261,7 @@ value camlidl_plplot_core_c_plgdev(value _unit)
   camlidl_ctx _ctx = &_ctxs;
   p_dev = camlidl_malloc(1024 * sizeof(char ), _ctx);
   c_plgdev(p_dev);
-  _vres = copy_string(p_dev);
+  _vres = caml_copy_string(p_dev);
   camlidl_free(_ctx);
   return _vres;
 }
@@ -1285,10 +1285,10 @@ value camlidl_plplot_core_c_plgdidev(value _unit)
   p_jy = &_c4;
   c_plgdidev(p_mar, p_aspect, p_jx, p_jy);
   Begin_roots_block(_vres, 4)
-    _vres[0] = copy_double(*p_mar);
-    _vres[1] = copy_double(*p_aspect);
-    _vres[2] = copy_double(*p_jx);
-    _vres[3] = copy_double(*p_jy);
+    _vres[0] = caml_copy_double(*p_mar);
+    _vres[1] = caml_copy_double(*p_aspect);
+    _vres[2] = caml_copy_double(*p_jx);
+    _vres[3] = caml_copy_double(*p_jy);
     _vresult = camlidl_alloc_small(4, 0);
     Field(_vresult, 0) = _vres[0];
     Field(_vresult, 1) = _vres[1];
@@ -1306,7 +1306,7 @@ value camlidl_plplot_core_c_plgdiori(value _unit)
 
   p_rot = &_c1;
   c_plgdiori(p_rot);
-  _vres = copy_double(*p_rot);
+  _vres = caml_copy_double(*p_rot);
   return _vres;
 }
 
@@ -1329,10 +1329,10 @@ value camlidl_plplot_core_c_plgdiplt(value _unit)
   p_ymax = &_c4;
   c_plgdiplt(p_xmin, p_ymin, p_xmax, p_ymax);
   Begin_roots_block(_vres, 4)
-    _vres[0] = copy_double(*p_xmin);
-    _vres[1] = copy_double(*p_ymin);
-    _vres[2] = copy_double(*p_xmax);
-    _vres[3] = copy_double(*p_ymax);
+    _vres[0] = caml_copy_double(*p_xmin);
+    _vres[1] = caml_copy_double(*p_ymin);
+    _vres[2] = caml_copy_double(*p_xmax);
+    _vres[3] = caml_copy_double(*p_ymax);
     _vresult = camlidl_alloc_small(4, 0);
     Field(_vresult, 0) = _vres[0];
     Field(_vresult, 1) = _vres[1];
@@ -1360,7 +1360,7 @@ value camlidl_plplot_core_c_plgfci(value _unit)
 
   pfci = &_c1;
   c_plgfci(pfci);
-  _vres = copy_int64(*pfci);
+  _vres = caml_copy_int64(*pfci);
   return _vres;
 }
 
@@ -1400,7 +1400,7 @@ value camlidl_plplot_core_c_plgfnam(value _unit)
   camlidl_ctx _ctx = &_ctxs;
   fnam = camlidl_malloc(1024 * sizeof(char ), _ctx);
   c_plgfnam(fnam);
-  _vres = copy_string(fnam);
+  _vres = caml_copy_string(fnam);
   camlidl_free(_ctx);
   return _vres;
 }
@@ -1472,8 +1472,8 @@ value camlidl_plplot_core_c_plgpage(value _unit)
   p_yoff = &_c6;
   c_plgpage(p_xp, p_yp, p_xleng, p_yleng, p_xoff, p_yoff);
   Begin_roots_block(_vres, 6)
-    _vres[0] = copy_double(*p_xp);
-    _vres[1] = copy_double(*p_yp);
+    _vres[0] = caml_copy_double(*p_xp);
+    _vres[1] = caml_copy_double(*p_yp);
     _vres[2] = Val_int(*p_xleng);
     _vres[3] = Val_int(*p_yleng);
     _vres[4] = Val_int(*p_xoff);
@@ -1544,10 +1544,10 @@ value camlidl_plplot_core_c_plgspa(value _unit)
   ymax = &_c4;
   c_plgspa(xmin, xmax, ymin, ymax);
   Begin_roots_block(_vres, 4)
-    _vres[0] = copy_double(*xmin);
-    _vres[1] = copy_double(*xmax);
-    _vres[2] = copy_double(*ymin);
-    _vres[3] = copy_double(*ymax);
+    _vres[0] = caml_copy_double(*xmin);
+    _vres[1] = caml_copy_double(*xmax);
+    _vres[2] = caml_copy_double(*ymin);
+    _vres[3] = caml_copy_double(*ymax);
     _vresult = camlidl_alloc_small(4, 0);
     Field(_vresult, 0) = _vres[0];
     Field(_vresult, 1) = _vres[1];
@@ -1578,7 +1578,7 @@ value camlidl_plplot_core_c_plgver(value _unit)
   camlidl_ctx _ctx = &_ctxs;
   p_ver = camlidl_malloc(1024 * sizeof(char ), _ctx);
   c_plgver(p_ver);
-  _vres = copy_string(p_ver);
+  _vres = caml_copy_string(p_ver);
   camlidl_free(_ctx);
   return _vres;
 }
@@ -1602,10 +1602,10 @@ value camlidl_plplot_core_c_plgvpd(value _unit)
   p_ymax = &_c4;
   c_plgvpd(p_xmin, p_xmax, p_ymin, p_ymax);
   Begin_roots_block(_vres, 4)
-    _vres[0] = copy_double(*p_xmin);
-    _vres[1] = copy_double(*p_xmax);
-    _vres[2] = copy_double(*p_ymin);
-    _vres[3] = copy_double(*p_ymax);
+    _vres[0] = caml_copy_double(*p_xmin);
+    _vres[1] = caml_copy_double(*p_xmax);
+    _vres[2] = caml_copy_double(*p_ymin);
+    _vres[3] = caml_copy_double(*p_ymax);
     _vresult = camlidl_alloc_small(4, 0);
     Field(_vresult, 0) = _vres[0];
     Field(_vresult, 1) = _vres[1];
@@ -1634,10 +1634,10 @@ value camlidl_plplot_core_c_plgvpw(value _unit)
   p_ymax = &_c4;
   c_plgvpw(p_xmin, p_xmax, p_ymin, p_ymax);
   Begin_roots_block(_vres, 4)
-    _vres[0] = copy_double(*p_xmin);
-    _vres[1] = copy_double(*p_xmax);
-    _vres[2] = copy_double(*p_ymin);
-    _vres[3] = copy_double(*p_ymax);
+    _vres[0] = caml_copy_double(*p_xmin);
+    _vres[1] = caml_copy_double(*p_xmax);
+    _vres[2] = caml_copy_double(*p_ymin);
+    _vres[3] = caml_copy_double(*p_ymax);
     _vresult = camlidl_alloc_small(4, 0);
     Field(_vresult, 0) = _vres[0];
     Field(_vresult, 1) = _vres[1];
@@ -1770,9 +1770,9 @@ value camlidl_plplot_core_c_plhlsrgb(
   p_b = &_c3;
   c_plhlsrgb(h, l, s, p_r, p_g, p_b);
   Begin_roots_block(_vres, 3)
-    _vres[0] = copy_double(*p_r);
-    _vres[1] = copy_double(*p_g);
-    _vres[2] = copy_double(*p_b);
+    _vres[0] = caml_copy_double(*p_r);
+    _vres[1] = caml_copy_double(*p_g);
+    _vres[2] = caml_copy_double(*p_b);
     _vresult = camlidl_alloc_small(3, 0);
     Field(_vresult, 0) = _vres[0];
     Field(_vresult, 1) = _vres[1];
@@ -2436,7 +2436,7 @@ value camlidl_plplot_core_c_plrandd(value _unit)
   value _vres;
 
   _res = c_plrandd();
-  _vres = copy_double(_res);
+  _vres = caml_copy_double(_res);
   return _vres;
 }
 
@@ -2471,9 +2471,9 @@ value camlidl_plplot_core_c_plrgbhls(
   p_s = &_c3;
   c_plrgbhls(r, g, b, p_h, p_l, p_s);
   Begin_roots_block(_vres, 3)
-    _vres[0] = copy_double(*p_h);
-    _vres[1] = copy_double(*p_l);
-    _vres[2] = copy_double(*p_s);
+    _vres[0] = caml_copy_double(*p_h);
+    _vres[1] = caml_copy_double(*p_l);
+    _vres[2] = caml_copy_double(*p_s);
     _vresult = camlidl_alloc_small(3, 0);
     Field(_vresult, 0) = _vres[0];
     Field(_vresult, 1) = _vres[1];
@@ -3908,8 +3908,8 @@ value camlidl_plplot_core_plMinMax2dGrid(
   fmin = &_c7;
   plMinMax2dGrid(f, nx, ny, fmax, fmin);
   Begin_roots_block(_vres, 2)
-    _vres[0] = copy_double(*fmax);
-    _vres[1] = copy_double(*fmin);
+    _vres[0] = caml_copy_double(*fmax);
+    _vres[1] = caml_copy_double(*fmin);
     _vresult = camlidl_alloc_small(2, 0);
     Field(_vresult, 0) = _vres[0];
     Field(_vresult, 1) = _vres[1];
@@ -4359,8 +4359,8 @@ value camlidl_plplot_core_ml_pltr0(
   ty = &_c2;
   ml_pltr0(x, y, tx, ty);
   Begin_roots_block(_vres, 2)
-    _vres[0] = copy_double(*tx);
-    _vres[1] = copy_double(*ty);
+    _vres[0] = caml_copy_double(*tx);
+    _vres[1] = caml_copy_double(*ty);
     _vresult = camlidl_alloc_small(2, 0);
     Field(_vresult, 0) = _vres[0];
     Field(_vresult, 1) = _vres[1];
@@ -4390,7 +4390,7 @@ value camlidl_plplot_core_plg_current_col1(value _unit)
   value _vres;
 
   _res = plg_current_col1();
-  _vres = copy_double(_res);
+  _vres = caml_copy_double(_res);
   return _vres;
 }
 
@@ -4400,7 +4400,7 @@ value camlidl_plplot_core_plgwidth(value _unit)
   value _vres;
 
   _res = plgwidth();
-  _vres = copy_double(_res);
+  _vres = caml_copy_double(_res);
   return _vres;
 }
 
@@ -4410,7 +4410,7 @@ value camlidl_plplot_core_plgchrht(value _unit)
   value _vres;
 
   _res = plgchrht();
-  _vres = copy_double(_res);
+  _vres = caml_copy_double(_res);
   return _vres;
 }
 
