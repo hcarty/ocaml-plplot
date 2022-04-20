@@ -32,7 +32,7 @@ value camlidl_find_enum(int n, int *flags, int nflags, char *errmsg)
   for (i = 0; i < nflags; i++) {
     if (n == flags[i]) return Val_int(i);
   }
-  invalid_argument(errmsg);
+  caml_invalid_argument(errmsg);
   return Val_unit;              /* not reached, keeps CL happy */
 }
 
@@ -44,7 +44,7 @@ value camlidl_alloc_flag_list(int n, int *flags, int nflags)
   Begin_root(l)
     for (i = nflags - 1; i >= 0; i--)
       if (n & flags[i]) {
-        value v = alloc_small(2, 0);
+        value v = caml_alloc_small(2, 0);
         Field(v, 0) = Val_int(i);
         Field(v, 1) = l;
         l = v;
@@ -70,7 +70,7 @@ void camlidl_register_allocation(camlidl_free_function free_fn,
 {
   if (ctx->flags & CAMLIDL_TRANSIENT) {
     struct camlidl_block_list * l =
-      stat_alloc(sizeof(struct camlidl_block_list));
+      caml_stat_alloc(sizeof(struct camlidl_block_list));
     l->free_fn = free_fn;
     l->block = block;
     l->next = ctx->head;
@@ -92,8 +92,8 @@ void * camlidl_malloc(size_t sz, camlidl_ctx ctx)
   if (res == NULL) raise_out_of_memory();
   camlidl_register_allocation(camlidl_task_mem_free, res, ctx);
 #else
-  void * res = stat_alloc(sz);
-  camlidl_register_allocation(stat_free, res, ctx);
+  void * res = caml_stat_alloc(sz);
+  camlidl_register_allocation(caml_stat_free, res, ctx);
 #endif
   return res;
 }
@@ -105,13 +105,13 @@ void camlidl_free(camlidl_ctx ctx)
     arena->free_fn(arena->block);
     tmp = arena;
     arena = arena->next;
-    stat_free(tmp);
+    caml_stat_free(tmp);
   }
 }
 
 char * camlidl_malloc_string(value mlstring, camlidl_ctx ctx)
 {
-  mlsize_t len = string_length(mlstring);
+  mlsize_t len = caml_string_length(mlstring);
   char * res = camlidl_malloc(len + 1, ctx);
   memcpy(res, String_val(mlstring), len + 1);
   return res;
@@ -133,7 +133,7 @@ value camlidl_alloc (mlsize_t wosize, tag_t tag)
       for (i = 0; i < wosize; i++) Field (result, i) = 0;
     }
   }else{
-    result = alloc_shr (wosize, tag);
+    result = caml_alloc_shr (wosize, tag);
     if (tag < No_scan_tag) memset (Bp_val (result), 0, Bsize_wsize (wosize));
     result = check_urgent_gc (result);
   }
